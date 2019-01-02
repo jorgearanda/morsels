@@ -8,4 +8,4 @@ def is_anagram(first_string, second_string):
 def sorted_letters(string):
     string = unicodedata.normalize("NFKD", string).lower()
 
-    return sorted([letter for letter in string if letter.isalpha()])
+    return sorted(letter for letter in string if letter.isalpha())
