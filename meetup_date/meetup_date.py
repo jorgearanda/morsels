@@ -19,15 +19,11 @@ def meetup_date(year, month, nth=4, weekday=3):
     return dates_by_weekday[weekday][nth]
 
 
-class WeekdayEnum:
-    def __init__(self):
-        self.MONDAY = 0
-        self.TUESDAY = 1
-        self.WEDNESDAY = 2
-        self.THURSDAY = 3
-        self.FRIDAY = 4
-        self.SATURDAY = 5
-        self.SUNDAY = 6
-
-
-Weekday = WeekdayEnum()
+class Weekday:
+    MONDAY = 0
+    TUESDAY = 1
+    WEDNESDAY = 2
+    THURSDAY = 3
+    FRIDAY = 4
+    SATURDAY = 5
+    SUNDAY = 6
