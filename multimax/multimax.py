@@ -1,5 +1,13 @@
 def multimax(seq, key=lambda item: item):
-    _seq = list(seq)
-    max_value = key(max(_seq, key=key, default=None))
+    """Return all the items in a sequence that are the maximum value of the sequence."""
+    max_value = None
+    res = []
+    for value in seq:
+        if max_value is None or max_value == key(value):
+            max_value = key(value)
+            res.append(value)
+        elif max_value < key(value):
+            max_value = key(value)
+            res = [value]
 
-    return [item for item in _seq if key(item) == max_value]
+    return res
