@@ -1,13 +1,10 @@
-import io
+import unicodedata
 import sys
 
 
 def escape(input):
-    with open(input, "rb") as f:
-        sys.stdout = io.BytesIO()
-        sys.stdout.write(b"print(hello world)")
-        sys.stdout.flush()
-        # io.BytesIO().write(f.read().decode("utf-8").encode("ascii", "backslashreplace"))
+    with open(input, "r") as f:
+        print(f.read().encode("raw_unicode_escape").decode(), end="")
 
 
 if __name__ == "__main__":

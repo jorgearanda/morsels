@@ -28,7 +28,6 @@ class UnicodeEscapeTests(unittest.TestCase):
             output = run_program("unicode_escape.py", args=[filename])
         self.assertEqual(contents, output)
 
-    @unittest.expectedFailure
     def test_multiple_lines_and_multiple_characters(self):
         contents = dedent(
             """
