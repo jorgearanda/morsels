@@ -83,7 +83,7 @@ class FloatRangeTests(unittest.TestCase):
         self.assertEqual(len(float_range(11, 1.2, -2)), 5)
         self.assertEqual(len(float_range(11, 1.2, 2)), 0)
 
-    @unittest.expectedFailure
+    # @unittest.expectedFailure
     def test_reversed(self):
         r = reversed(float_range(0.5, 7, 0.75))
         self.assertEqual(list(r), [6.5, 5.75, 5.0, 4.25, 3.5, 2.75, 2.0, 1.25, 0.5])

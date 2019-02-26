@@ -1,4 +1,6 @@
 class float_range:
+    """Provide elements along a range with float parameters."""
+
     def __init__(self, first_limit, second_limit=None, step=1):
         if second_limit is None:
             self._start = 0
@@ -8,6 +10,18 @@ class float_range:
             self._stop = second_limit
         self._step = step
         self._cursor = None
+
+    def __len__(self):
+        if self._empty_range():
+            return 0
+        else:
+            return int((abs(self._stop - self._start) - 0.00001) // abs(self._step) + 1)
+
+    def __getitem__(self, key):
+        if key < len(self):
+            return self._start + (key * self._step)
+        else:
+            raise IndexError
 
     def __iter__(self):
         return self
@@ -23,24 +37,20 @@ class float_range:
         else:
             return self._cursor
 
-    def __len__(self):
-        if self._increasing_range() and self._start >= self._stop:
-            return 0
-        elif not self._increasing_range() and self._start <= self._stop:
-            return 0
-        else:
-            return int((abs(self._stop - self._start) - 0.00001) // abs(self._step) + 1)
-
-    def __reversed__(self):
-        self._start, self._stop = self._stop, self._start
-        self._step *= -1
-        return self
-
     def _should_stop(self):
         if self._increasing_range():
             return self._reached_top()
         else:
             return self._reached_bottom()
+
+    def _empty_range(self):
+        return self._empty_increasing_range() or self._empty_decreasing_range()
+
+    def _empty_increasing_range(self):
+        return self._increasing_range() and self._stop <= self._start
+
+    def _empty_decreasing_range(self):
+        return not self._increasing_range() and self._start <= self._stop
 
     def _increasing_range(self):
         return self._step > 0
