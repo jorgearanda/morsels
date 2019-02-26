@@ -28,20 +28,17 @@ class float_range:
 
     def __next__(self):
         if self._cursor is None:
-            self._cursor = self._start
+            self._cursor = 0
         else:
-            self._cursor += self._step
+            self._cursor += 1
 
         if self._should_stop():
             raise StopIteration
         else:
-            return self._cursor
+            return self[self._cursor]
 
     def _should_stop(self):
-        if self._increasing_range():
-            return self._reached_top()
-        else:
-            return self._reached_bottom()
+        return self._cursor >= len(self)
 
     def _empty_range(self):
         return self._empty_increasing_range() or self._empty_decreasing_range()
@@ -54,9 +51,3 @@ class float_range:
 
     def _increasing_range(self):
         return self._step > 0
-
-    def _reached_top(self):
-        return self._cursor >= self._stop
-
-    def _reached_bottom(self):
-        return self._cursor <= self._stop
